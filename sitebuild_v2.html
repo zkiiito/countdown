@@ -13,6 +13,7 @@
         <div id="img"></div>
 
         <div id="counter">
+            <p class="title">Title</p>
             <p>
                 <span id="days">11</span><span id="label-days">NAP</span>
 
@@ -20,60 +21,75 @@
             </p>
         </div>
 
+        <div id="editbtn">+ EDIT</div>
         <div id="editor">
             <form action='#' onsubmit="return false;">
 
-                <fieldset>
-                    <legend>Counter</legend>
-                    <label for="date">Target date</label>
-                    <input id="date" type="text"/>
-                    <br/>
+                <label for="title">Event title</label>
+                <input id="title" name="title" type="text" required="required"/>
+                <br/>
 
-                    <label for="counterpos">position</label>
-                    <select id="counterpos">
-                        <option value="TL" selected="selected">TL</option>
-                        <option value="TC">TC</option>
-                        <option value="TR">TR</option>
-                        <option value="CL">CL</option>
-                        <option value="CC">CC</option>
-                        <option value="CR">CR</option>
-                        <option value="BL">BL</option>
-                        <option value="BC">BC</option>
-                        <option value="BR">BR</option>
-                        <option value="custom">custom</option>
-                    </select>
-                </fieldset>
+                <label for="date">Target date</label>
+                <input id="date" name="date" type="text" required="required"/>
+                <br/>
 
-                <fieldset>
-                    <legend>Image</legend>
-                    <label for="imgfile">source</label>
-                    <input type='file' id='imgfile'/>
-                    <br/>
+                <label for="counterpos">Counter position</label>
+                <select id="counterpos" name="counterpos">
+                    <option value="TL" selected="selected">TopLeft</option>
+                    <option value="TC">TopCenter</option>
+                    <option value="TR">TopRight</option>
+                    <option value="CL">CenterLeft</option>
+                    <option value="CC">CenterCenter</option>
+                    <option value="CR">CenterRight</option>
+                    <option value="BL">BottomLeft</option>
+                    <option value="BC">BottomCenter</option>
+                    <option value="BR">BottomRight</option>
+                    <option value="custom">Custom</option>
+                </select>
+                
+                <input type="hidden" id="counterpos-custom" name="counterpos-custom"/>
 
-                    <label for="imgpos">position</label>
-                    <select id="imgpos">
-                        <option value="TL" selected="selected">TL</option>
-                        <option value="TC">TC</option>
-                        <option value="TR">TR</option>
-                        <option value="CL">CL</option>
-                        <option value="CC">CC</option>
-                        <option value="CR">CR</option>
-                        <option value="BL">BL</option>
-                        <option value="BC">BC</option>
-                        <option value="BR">BR</option>
-                    </select>
-                    <br/>
-                    <label for="imgstyle">style</label>
-                    <select id="imgstyle">
-                        <option value="cover">fill</option>
-                        <option value="contain">stretch</option>
-                    </select>
+                <label for="imgfile">Background image</label>
+                <div id="files">
+                <input type="file" id="imgfile" name="imgfile"/>
+                <input type="text" id="fakeimgfile" required="required"/>
+                </div>
 
-                </fieldset>
-
+                <label for="imgpos">Background pos</label>
+                <select id="imgpos" name="imgpos">
+                    <option value="TL" selected="selected">TopLeft</option>
+                    <option value="TC">TopCenter</option>
+                    <option value="TR">TopRight</option>
+                    <option value="CL">CenterLeft</option>
+                    <option value="CC">CenterCenter</option>
+                    <option value="CR">CenterRight</option>
+                    <option value="BL">BottomLeft</option>
+                    <option value="BC">BottomCenter</option>
+                    <option value="BR">BottomRight</option>
+                </select>
+                <br/>
+                <label for="imgstyle">Backgroud style</label>
+                <select id="imgstyle" name="imgstyle">
+                    <option value="cover">fill</option>
+                    <option value="contain">stretch</option>
+                </select>
+                <br/>
+                <button type="submit">Save</button>
             </form>
         </div>
 
+        <script>
+            var counterValues = {
+                title: 'Izland 2013',
+                date: '04/17/2013 21:15',
+                counterpos: 'custom',
+                'counterpos-custom': '4|57',
+                imgpos: 'BC',
+                imgstyle: 'cover',
+                fakeimgfile: 'photos/iceland.jpg'
+            };
+        </script>
+        
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
         <script src="js/jquery-ui-timepicker-addon.js"></script>

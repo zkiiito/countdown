@@ -15,7 +15,7 @@ html, body {
 	color: #fff;
 	margin: 0;
 	padding: 0;
-	/*overflow: hidden;*/
+	overflow: hidden;
 }
 
 #img {
@@ -38,6 +38,13 @@ html, body {
 	text-shadow: 0px 0px 5px rgba(0,0,0,0.8);
 	cursor: move;
         letter-spacing: -0.05em;
+}
+
+#counter p.title {
+    font-size: 2em;
+    margin-bottom: -0.5em;
+    letter-spacing: 0;
+    text-transform: uppercase;
 }
 
 #counter p #label-days {

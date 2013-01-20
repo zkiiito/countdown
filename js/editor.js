@@ -2,12 +2,20 @@ var Editor = {
 	counter: null,
 	image: null,
 	
-	
 	init: function(counter, image) {
 		Editor.counter = counter;
 		Editor.image = image;
-		
+                
 		Editor.counter.initDrag();
+                
+                $('#editbtn').click(function(){
+                    $(this).hide();
+                    $('#editor').animate({right: 0});
+                });
+                
+                $('#title').on('keyup keydown change', function(){
+                    $('title, .title').text($(this).val());
+                });
 	
 		$('#date').datetimepicker().change(function(){Editor.counter.setDate($('#date').val())});
 		
@@ -28,9 +36,38 @@ var Editor = {
 		});
 		
 		$('#imgfile').change(function(){
-			 Editor.loadImage();
+                        Editor.loadImage();
+                        $('#fakeimgfile').val($(this).val());
 		});
+                
+                $('form').submit(function(){
+                    if ('custom' === $('#counterpos').val()) {
+                        $('#counterpos-custom').val(Editor.counter.el.data('xpos') + '|' + Editor.counter.el.data('ypos'));
+                    } else {
+                        $('#counterpos-custom').val('');
+                    }
+                    
+                    console.log($(this).serialize());
+                    $('#editor').animate({right: -170});
+                    $('#editbtn').show();
+                    alert('Coming soon!');
+                });
+                
+                Editor.initValues();
 	},
+        
+        initValues: function() {
+            if (counterValues) {
+                for (var i in counterValues) {
+                    $('#' + i).val(counterValues[i]).triggerHandler('change');
+                }
+                if ($('#counterpos-custom').val().length) {
+                    var pos = $('#counterpos-custom').val().split('|');
+                    Editor.counter.setPos(pos[0], pos[1]);
+                }
+                image.setImage(counterValues['fakeimgfile']);
+            }
+        },
 	
 	//http://stackoverflow.com/questions/2865017/get-image-dimensions-using-javascript-during-file-upload/2865063#2865063
 	loadImage: function() {

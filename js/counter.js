@@ -1,19 +1,18 @@
 function Counter(el) {
 	this.el = el;
-	this.intervalDiff = 40;
+	this.intervalDiff = 210;
 	var that = this,
 	    targetDate = null,
 	    interval = null,
-		secs = null,
-		mins = null,
-		hours = null,
-		days = null;
-		
-		diff = 0,
-		diffCount = 0;
+            secs = null,
+            mins = null,
+            hours = null,
+            days = null;
+
+            diff = 0,
+            diffCount = 0;
 	
-	this.initPos = function() {
-            
+	this.init = function() {
 	};
 	
 	this.setDate = function(date) {
@@ -27,8 +26,11 @@ function Counter(el) {
 		if (that.diffCount <= 0) {
 			that.diffCount = 100;
 			var d = that.diff;
-			that.diff = Math.abs(that.targetDate - new Date().getTime()) / 1000;
-			console.log('error: ' + (d - that.diff));
+			that.diff = Math.max((that.targetDate - new Date().getTime()) / 1000, 0);
+			//console.log('error: ' + (d - that.diff));
+                        if (that.diff === 0) {
+                            clearInterval(that.interval);
+                        }
 		} else {
 			that.diffCount--;
 			that.diff -= that.intervalDiff/1000;
@@ -42,6 +44,10 @@ function Counter(el) {
 			diffHours = Math.floor(diffMins / 60),
 			hours = diffHours % 24,
 			days = Math.floor(diffHours / 24);
+                        
+                while (millis.length < 3) {
+                    millis += '0';
+                }
 			
 		if (secs < 10)
 			secs = '0' + secs;
@@ -79,6 +85,9 @@ function Counter(el) {
 		that.el.draggable({
 			containment: $('body'),
 			scroll: false,
+                        start: function(event, ui) {
+                            $('#counterpos').val('custom');
+                        },
 			stop: function(event, ui) {
 				ui.helper.data('xpos', ui.position.left / $(document).width() * 100);
 				ui.helper.data('ypos', ui.position.top / $(document).height() * 100);
@@ -113,6 +122,7 @@ function Counter(el) {
 				break;
 			default:
 				that.el.css('top', y + '%');
+				that.el.css('bottom', '');
 		}
 	
 		that.el.data('ypos', y);
@@ -134,6 +144,7 @@ function Counter(el) {
 				break;
 			default:
 				that.el.css('left', x + '%');
+				that.el.css('right', '');
 		}
 		
 		that.el.data('xpos', x);
@@ -142,8 +153,4 @@ function Counter(el) {
 
 
 var counter = new Counter($('#counter'));
-counter.initPos();
-
-$(window).bind("load", function() {
-    counter.initPos();
-});
+counter.init();

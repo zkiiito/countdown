@@ -1,24 +1,68 @@
-#editor {
-	position: absolute;
-	bottom: 0;
-	background: rgba(0, 0, 0, 0.6);
-	width: 100%;
+#editbtn {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 1em;
+    font-family: 'futura_md_btbold'; 
+    text-align: center;
+    width: 200px;
+    line-height: 2em;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-#editor fieldset {
-	float: left;
-	width: 300px;
+#editor {
+    position: absolute;
+    right: -170px;
+    height: 100%;
+    width: 170px;
+    wifdth: 0;
+    background: rgba(0, 0, 0, 0.6);
+    /*background-color: #0B1419;*/
 }
+
+#editor form {
+    margin: 20px;
+}
+
 
 #editor label {
-	width: 90px;
-	float: left;
-	display: block;
-}
-#editor input, #editor select {
-	width: 100px;
+    fwidth: 120px;
+    display: block;
+    font-size: 0.7em;
+    padding-top: 15px;
+    padding-left: 3px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: 0 1px rgba(0,0,0,0.8);
 }
 
-#time {
-	width: 4em;
+#editor input, #editor select, #editor button {
+    width: 120px;
+    border-radius: 4px;
+    border: 0 none;
+    padding: 4px;
+    margin-top: 5px;
+    box-shadow: 0 1px rgba(0,0,0,0.8);
+}
+
+#editor #files {
+    position: relative;
+}
+
+#editor #imgfile {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+#editor button {
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 20px;
+    line-height: 2em;
+    font-weight: bold;
+    cursor: pointer;
 }
