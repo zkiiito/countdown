@@ -36,9 +36,13 @@ html, body {
 	margin: 0; 
 	font-family: 'futura_md_btbold'; 
 	text-shadow: 0px 0px 5px rgba(0,0,0,0.8);
-	/*filter: glow(color=#000000,strength=1);*/
-	filter: dropshadow(color=#000000,offX=1,offY=1);
 	cursor: move;
+        letter-spacing: -0.05em;
+}
+
+#counter p #label-days {
+    font-size: 0.3em;
+    letter-spacing: 0;
 }
 
 #counter #labels {

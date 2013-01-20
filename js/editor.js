@@ -9,8 +9,7 @@ var Editor = {
 		
 		Editor.counter.initDrag();
 	
-		$('#date').datepicker().change(function(){Editor.counter.setDate($('#date').val(), $('#time').val())});
-		$('#time').timePicker().change(function(){Editor.counter.setDate($('#date').val(), $('#time').val())});
+		$('#date').datetimepicker().change(function(){Editor.counter.setDate($('#date').val())});
 		
 		$('#counterpos').change(function(){
 			var pos = $(this).val();

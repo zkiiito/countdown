@@ -13,15 +13,11 @@ function Counter(el) {
 		diffCount = 0;
 	
 	this.initPos = function() {
-		$('#labels', that.el).css('top', that.el.find('p').height() * 0.78 + 'px');
-
-		el.find('p span').each(function(idx, element) {
-			$('#label-' + element.id, that.el).css('left', ($(element).position().left + $(element).width()/4*3) + 'px');
-		});
+            
 	};
 	
-	this.setDate = function(date, time) {
-		that.targetDate = new Date(date + ' ' +  time).getTime();
+	this.setDate = function(date) {
+		that.targetDate = new Date(date).getTime();
 		clearInterval(that.interval);
 		that.diffCount = 0;
 		that.interval = setInterval(that.render, that.intervalDiff);
@@ -55,9 +51,6 @@ function Counter(el) {
 			
 		if (hours < 10)
 			hours = '0' + hours;
-			
-		if (days < 10)
-			days = '0' + days;
 			
 		$('#millis').text(millis);
 		
