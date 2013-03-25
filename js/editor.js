@@ -3,75 +3,86 @@ var Editor = {
 	image: null,
 	
 	init: function(counter, image) {
-		Editor.counter = counter;
-		Editor.image = image;
+        var that = this;
+		that.counter = counter;
+		that.image = image;
                 
-		Editor.counter.initDrag();
+		that.counter.initDrag();
                 
-                $('#editbtn').click(function(){
-                    $(this).hide();
-                    $('#editor').animate({right: 0});
-                });
-                
-                $('#title').on('keyup keydown change', function(){
-                    $('title, .title').text($(this).val());
-                });
+        $('#editbtn').click(function(){
+            $(this).hide();
+            $('#editor').animate({right: 0});
+        });
+
+        $('#title').on('keyup keydown change', function(){
+            $('title, .title').text($(this).val());
+        });
 	
-		$('#date').datetimepicker().change(function(){Editor.counter.setDate($('#date').val())});
+		$('#date').datetimepicker().change(function(){that.counter.setDate($('#date').val())});
 		
 		$('#counterpos').change(function(){
 			var pos = $(this).val();
 			var vpos = pos[0];
 			var hpos = pos[1];
-			Editor.counter.setPos(hpos, vpos);
+			that.counter.setPos(hpos, vpos);
 		});
 
 		$('#imgpos').change(function(){
 			var pos = $(this).val();
-			Editor.image.setPos(pos);
+			that.image.setPos(pos);
 		});
 
 		$('#imgstyle').change(function(){
-			Editor.image.setSize($(this).val());
+			that.image.setSize($(this).val());
 		});
 		
 		$('#imgfile').change(function(){
-                        Editor.loadImage();
-                        $('#fakeimgfile').val($(this).val());
+            that.loadImage();
+            $('#fakeimgfile').val($(this).val());
 		});
                 
-                $('form').submit(function(){
-                    if ('custom' === $('#counterpos').val()) {
-                        $('#counterpos-custom').val(Editor.counter.el.data('xpos') + '|' + Editor.counter.el.data('ypos'));
-                    } else {
-                        $('#counterpos-custom').val('');
-                    }
-                    
-                    console.log($(this).serialize());
-                    $('#editor').animate({right: -170});
-                    $('#editbtn').show();
-                    alert('Coming soon!');
-                });
-                
-                Editor.initValues();
-	},
-        
-        initValues: function() {
-            if (counterValues) {
-                for (var i in counterValues) {
-                    $('#' + i).val(counterValues[i]).triggerHandler('change');
-                }
-                if ($('#counterpos-custom').val().length) {
-                    var pos = $('#counterpos-custom').val().split('|');
-                    Editor.counter.setPos(pos[0], pos[1]);
-                }
-                image.setImage(counterValues['fakeimgfile']);
+        $('form').submit(function(){
+            var form = $(this);
+
+            if ('custom' === $('#counterpos').val()) {
+                $('#counterpos-custom').val(that.counter.el.data('xpos') + '|' + that.counter.el.data('ypos'));
+            } else {
+                $('#counterpos-custom').val('');
             }
-        },
+
+            FacebookBridge.loginAndUpload($('#imgfile'), function(url){
+                console.log(form.serialize());
+                that.afterSave();
+            });
+
+        });
+
+        that.initValues();
+	},
+
+    afterSave: function() {
+        alert('Saved!');
+        $('#editor').animate({right: -170});
+        $('#editbtn').show();
+    },
+        
+    initValues: function() {
+        if (counterValues) {
+            for (var i in counterValues) {
+                $('#' + i).val(counterValues[i]).triggerHandler('change');
+            }
+            if ($('#counterpos-custom').val().length) {
+                var pos = $('#counterpos-custom').val().split('|');
+                this.counter.setPos(pos[0], pos[1]);
+            }
+            image.setImage(counterValues['fakeimgfile']);
+        }
+    },
 	
 	//http://stackoverflow.com/questions/2865017/get-image-dimensions-using-javascript-during-file-upload/2865063#2865063
 	loadImage: function() {
 		var input, file, fr, img;
+        var that = this;
 
 		if (typeof window.FileReader !== 'function') {
 			alert("The file API isn't supported on this browser yet.");
@@ -92,7 +103,7 @@ var Editor = {
 			file = input.files[0];
 			fr = new FileReader();
 			fr.onload = function(){
-				Editor.image.setImage(fr.result);
+				that.image.setImage(fr.result);
 			}
 			fr.readAsDataURL(file);
 		}
