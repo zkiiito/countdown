@@ -34,7 +34,7 @@ var FacebookBridge = {
                 that.postPhoto(fileElement, function(src){
                     console.log(src);
                     callback(src);
-                })
+                });
             } else {
                 console.log('User cancelled login or did not fully authorize.');
             }
@@ -45,6 +45,7 @@ var FacebookBridge = {
         var url = 'https://graph.facebook.com/me/photos?access_token=' + FB.getAccessToken();
         var data = new FormData();
         data.append('file', fileElement[0].files[0]);
+        data.append('no_story', 1);
 
         $.ajax({
             url: url,

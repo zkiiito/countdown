@@ -60,22 +60,22 @@ function Counter(el) {
 
         $('#millis').text(millis);
 
-        if (that.secs != secs) {
+        if (that.secs !== secs) {
             $('#secs').text(secs);
             that.secs = secs;
         }
 
-        if (that.mins != mins) {
+        if (that.mins !== mins) {
             $('#mins').text(mins);
             that.mins = mins;
         }
 
-        if (that.hours != hours) {
+        if (that.hours !== hours) {
             $('#hours').text(hours);
             that.hours = hours;
         }
 
-        if (that.days != days) {
+        if (that.days !== days) {
             $('#days').text(days);
             that.days = days;
         }
