@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>counter</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="css/counter.css"/>
+        <link rel="stylesheet" href="css/editor.css"/>
+        <link rel="stylesheet" href="css/jquery-ui-timepicker-addon.css"/>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/ui-darkness/jquery-ui.css"/>
+    </head>
+    <body>
+
+        <div id="img"></div>
+
+        <div id="counter">
+            <p class="title">Title</p>
+            <p>
+                <span id="days">11</span><span id="label-days">NAP</span>
+
+                <span id="hours">23</span>:<span id="mins">08</span>:<span id="secs">08</span>.<span id="millis">678</span>
+            </p>
+        </div>
+
+        <div id="editbtn">+ EDIT</div>
+        <div id="editor">
+            <form action='#' onsubmit="return false;">
+
+                <label for="title">Event title</label>
+                <input id="title" name="title" type="text" required="required"/>
+                <br/>
+
+                <label for="date">Target date</label>
+                <input id="date" name="date" type="text" required="required"/>
+                <br/>
+
+                <label for="counterpos">Counter position</label>
+                <select id="counterpos" name="counterpos">
+                    <option value="TL" selected="selected">TopLeft</option>
+                    <option value="TC">TopCenter</option>
+                    <option value="TR">TopRight</option>
+                    <option value="CL">CenterLeft</option>
+                    <option value="CC">CenterCenter</option>
+                    <option value="CR">CenterRight</option>
+                    <option value="BL">BottomLeft</option>
+                    <option value="BC">BottomCenter</option>
+                    <option value="BR">BottomRight</option>
+                    <option value="custom">Custom</option>
+                </select>
+                
+                <input type="hidden" id="counterpos-custom" name="counterpos-custom"/>
+
+                <label for="imgfile">Background image</label>
+                <div id="files">
+                <input type="file" id="imgfile" name="imgfile"/>
+                <input type="text" id="fakeimgfile" required="required"/>
+                </div>
+
+                <label for="imgpos">Background pos</label>
+                <select id="imgpos" name="imgpos">
+                    <option value="TL" selected="selected">TopLeft</option>
+                    <option value="TC">TopCenter</option>
+                    <option value="TR">TopRight</option>
+                    <option value="CL">CenterLeft</option>
+                    <option value="CC">CenterCenter</option>
+                    <option value="CR">CenterRight</option>
+                    <option value="BL">BottomLeft</option>
+                    <option value="BC">BottomCenter</option>
+                    <option value="BR">BottomRight</option>
+                </select>
+                <br/>
+                <label for="imgstyle">Backgroud style</label>
+                <select id="imgstyle" name="imgstyle">
+                    <option value="cover">fill</option>
+                    <option value="contain">stretch</option>
+                </select>
+                <br/>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+
+        <div id="fb-root"></div>
+
+                
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+        <script src="js/jquery-ui-timepicker-addon.js"></script>
+        <script src="js/jquery-ui-sliderAccess.js"></script>
+
+        <script src="js/counter.js"></script>
+        <script src="js/image.js"></script>
+        <script src="settings.js"></script>
+        <script src="js/editor.js"></script>
+
+    </body>
+</html>

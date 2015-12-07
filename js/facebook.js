@@ -3,8 +3,8 @@ var FacebookBridge = {
     init: function() {
         window.fbAsyncInit = function() {
             FB.init({
-                appId      : '117631014938869',
-                channelUrl : '//localhost/counter-html/channel.html', // Channel File for x-domain communication
+                appId      : '426660794076744',
+                channelUrl : '//channel.html', // Channel File for x-domain communication
                 status     : true, // check the login status upon init?
                 cookie     : true, // set sessions cookies to allow your server to access the session?
                 xfbml      : true  // parse XFBML tags on this page?
@@ -38,7 +38,7 @@ var FacebookBridge = {
             } else {
                 console.log('User cancelled login or did not fully authorize.');
             }
-        }, {scope: 'user_photos,publish_stream'});
+        }, {scope: 'user_photos,publish_actions'});
     },
 
     postPhoto: function(fileElement, callback) {

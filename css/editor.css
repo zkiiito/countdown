@@ -17,7 +17,6 @@
     right: -170px;
     height: 100%;
     width: 170px;
-    wifdth: 0;
     background: rgba(0, 0, 0, 0.6);
     /*background-color: #0B1419;*/
 }
@@ -28,7 +27,6 @@
 
 
 #editor label {
-    fwidth: 120px;
     display: block;
     font-size: 0.7em;
     padding-top: 15px;
@@ -65,4 +63,8 @@
     line-height: 2em;
     font-weight: bold;
     cursor: pointer;
+}
+
+#counter p, #counter #labels span {
+    cursor: move;
 }
