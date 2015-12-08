@@ -25,7 +25,7 @@
 {% if editor %}
 <div id="editbtn">+ EDIT</div>
 <div id="editor">
-    <form action='#' onsubmit="return false;" id="editor-form">
+    <form action='#' onsubmit="return false;" id="editor-form" autocomplete="off">
 
         <label for="title">Event title</label>
         <input id="title" name="counterValues[title]" type="text" required="required">
@@ -54,7 +54,7 @@
         <label for="imgfile">Background image</label>
         <div id="files">
             <input type="file" id="imgfile" name="imgfile">
-            <input type="text" id="fakeimgfile" required="required">
+            <input type="text" id="fakeimgfile">
         </div>
 
         <label for="imgpos">Background pos</label>

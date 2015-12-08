@@ -1,11 +1,11 @@
 {
-  "name": "counter",
+  "name": "countdown",
   "version": "1.0.0",
   "description": "A simple countdown visualization",
-  "main": "index.js",
   "dependencies": {
     "body-parser": "^1.14.1",
     "cloudinary": "^1.2.6",
+    "connect-multiparty": "^2.0.0",
     "consolidate": "^0.13.1",
     "express": "^4.13.3",
     "redis": "^2.4.2",
@@ -13,17 +13,13 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://zkiiito@bitbucket.org/zkiiito/countdown.git"
+    "url": "git@github.com:zkiiito/countdown.git"
   },
-  "keywords": [
-    "countdown",
-    "counter"
-  ],
   "author": "zkiiito",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/zkiiito/countdown#readme"
+  "homepage": "https://github.com/zkiiito/countdown#readme"
 }

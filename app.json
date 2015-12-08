@@ -1,0 +1,13 @@
+{
+  "name": "counter",
+  "description": "A simple countdown visualization",
+  "keywords": ["countdown", "counter"],
+  "addons": ["rediscloud", "papertrail", "cloudinary"],
+  "repository": "https://github.com/zkiiito/countdown",
+  "env": {
+    "ADMINPASS": {
+      "description": "Admin password",
+      "value": "adminPass"
+    }
+  }
+}
