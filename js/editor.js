@@ -46,12 +46,28 @@ var Editor = {
             var form = $(this);
 
             if ('custom' === $('#counterpos').val()) {
-                $('#counterpos-custom').val(that.counter.el.data('xpos') + '|' + that.counter.el.data('ypos'));
+                $('#counterpos_custom').val(that.counter.el.data('xpos') + '|' + that.counter.el.data('ypos'));
             } else {
-                $('#counterpos-custom').val('');
+                $('#counterpos_custom').val('');
             }
 
-            console.log(form.serialize());
+            var formData = new FormData(document.getElementById('editor-form'));
+
+            jQuery.ajax({
+                url: document.location.href,
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function(data){
+                    if ("1" === data) {
+                        that.afterSave();
+                    } else {
+                        alert('wrong password');
+                    }
+                }
+            });
         });
 
         that.initValues();
@@ -66,8 +82,8 @@ var Editor = {
             for (var i in counterValues) {
                 $('#' + i).val(counterValues[i]).triggerHandler('change');
             }
-            if ($('#counterpos-custom').val().length) {
-                var pos = $('#counterpos-custom').val().split('|');
+            if ($('#counterpos_custom').val().length) {
+                var pos = $('#counterpos_custom').val().split('|');
                 this.counter.setPos(pos[0], pos[1]);
             }
             image.setImage(counterValues['fakeimgfile']);

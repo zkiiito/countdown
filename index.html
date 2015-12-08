@@ -1,27 +1,119 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>counter</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="css/counter.css"/>
+    <title>{{ title }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/css/counter.css">
+{% if editor %}
+    <link rel="stylesheet" href="/css/editor.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/ui-darkness/jquery-ui.css">
+{% endif %}
 </head>
 <body>
 
 <div id="img"></div>
 
 <div id="counter">
-    <p class="title">Title</p>
+    <p class="title">{{ title }}</p>
     <p class="time">
-        <span id="days">11</span><span id="label-days">NAP</span>
-        <span id="time">23:08:08.678</span>
+        <span id="days"></span><span id="label-days">NAP</span>
+        <span id="time"></span>
     </p>
 </div>
 
+{% if editor %}
+<div id="editbtn">+ EDIT</div>
+<div id="editor">
+    <form action='#' onsubmit="return false;" id="editor-form">
+
+        <label for="title">Event title</label>
+        <input id="title" name="counterValues[title]" type="text" required="required">
+        <br/>
+
+        <label for="date">Target date</label>
+        <input id="date" name="counterValues[date]" type="text" required="required">
+        <br/>
+
+        <label for="counterpos">Counter position</label>
+        <select id="counterpos" name="counterValues[counterpos]">
+            <option value="TL" selected="selected">TopLeft</option>
+            <option value="TC">TopCenter</option>
+            <option value="TR">TopRight</option>
+            <option value="CL">CenterLeft</option>
+            <option value="CC">CenterCenter</option>
+            <option value="CR">CenterRight</option>
+            <option value="BL">BottomLeft</option>
+            <option value="BC">BottomCenter</option>
+            <option value="BR">BottomRight</option>
+            <option value="custom">Custom</option>
+        </select>
+
+        <input type="hidden" id="counterpos_custom" name="counterValues[counterpos_custom]">
+
+        <label for="imgfile">Background image</label>
+        <div id="files">
+            <input type="file" id="imgfile" name="imgfile">
+            <input type="text" id="fakeimgfile" required="required">
+        </div>
+
+        <label for="imgpos">Background pos</label>
+        <select id="imgpos" name="counterValues[imgpos]">
+            <option value="TL" selected="selected">TopLeft</option>
+            <option value="TC">TopCenter</option>
+            <option value="TR">TopRight</option>
+            <option value="CL">CenterLeft</option>
+            <option value="CC">CenterCenter</option>
+            <option value="CR">CenterRight</option>
+            <option value="BL">BottomLeft</option>
+            <option value="BC">BottomCenter</option>
+            <option value="BR">BottomRight</option>
+        </select>
+        <br/>
+        <label for="imgstyle">Backgroud style</label>
+        <select id="imgstyle" name="counterValues[imgstyle]">
+            <option value="cover">fill</option>
+            <option value="contain">stretch</option>
+        </select>
+        <br/>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required="required">
+        <br/>
+        <button type="submit">Save</button>
+    </form>
+</div>
+{% endif %}
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
-<script src="js/counter.js"></script>
-<script src="js/image.js"></script>
-<script src="settings.js"></script>
+{% if editor %}
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-sliderAccess.js"></script>
+{% endif %}
+
+<script src="/js/counter.js"></script>
+<script src="/js/image.js"></script>
+<script>
+var counterValues = {{ counterValues|json|raw }};
+</script>
+{% if editor %}
+<script src="/js/editor.js"></script>
+{% else %}
+<script>
+image.setImage(counterValues.fakeimgfile);
+image.setPos(counterValues.imgpos);
+image.setSize(counterValues.imgstyle);
+counter.setDate(counterValues.date);
+
+if (counterValues.counterpos_custom) {
+    var pos = counterValues.counterpos_custom.split('|');
+    this.counter.setPos(pos[0], pos[1]);
+} else {
+    counter.setPos(counterValues.counterpos[1], counterValues.counterpos[0]);
+}
+</script>
+{% endif %}
 
 </body>
 </html>
